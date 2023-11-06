@@ -1,15 +1,39 @@
-message = input("Enter a message: ")
-offset = int(input("Enter the offset: "))
-encoded_message = ""
-for ch in message:
-    if ord(ch) >= ord('A') and ord(ch) <= ord('Z'):
-        pos = ord(ch) - ord('A')
-        pos = (pos + offset) % 26
-        encoded_message += chr(pos + ord('A'))
-    elif ord(ch) >= ord('a') and ord(ch) <= ord('z'):
-        pos = ord(ch) - ord('a')
-        pos = (pos + offset) % 26
-        encoded_message += chr(pos + ord('a'))
-    else:
-        encoded_message += ch
-print(encoded_message)
+presult = None
+operand = None
+operator = None
+wait_for_number = True
+
+while True:
+    while True:
+        try:
+            operand = input(">>>")
+            int(operand)
+        except ValueError:
+            print(f"'{operand}' is not a number. Enter again")
+        else:
+            operand = int(operand)
+            if not operator:
+                result = operand
+            else:
+                if operator == '+':
+                    result += operand
+                elif operator == '-':
+                    result -= operand
+                elif operator == '*':
+                    result *= operand
+                elif operator == '/':
+                    result /= operand
+            break
+
+    #break
+    while True:
+        operator = input(">>>")
+        if operator not in ['+', '-', '*', '/', '=']:
+            print(f"'{operator}' is not an operator (+ - * / =). Enter again")
+        else:
+            break
+    
+    if operator == '=':
+        break
+
+print(result)
